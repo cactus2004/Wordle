@@ -1,5 +1,3 @@
-import java.io.FileNotFoundException;
-
 public class WordleGame {
   // TODO - implement according to spec
   private int puzzleNumber;
@@ -8,11 +6,11 @@ public class WordleGame {
     this.puzzleNumber = puzzleNumber;
   }
 
-  public String getWord(int puzzleNumber) throws FileNotFoundException{
-    return WordBank.getAnswerForPuzzleNumber(puzzleNumber) ;
+  public String getAnswer(){
+    return WordBank.getAnswerForPuzzleNumber(this.puzzleNumber) ;
   }
 
-  public void guess(String guessWord) throws FileNotFoundException{
+  public void guess(String guessWord){
     if(WordBank.checkInDictionary(guessWord)){
       
       char[] charray = new char[guessWord.length()];
