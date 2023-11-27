@@ -3,7 +3,7 @@ public class WordleGame {
   private WordleLetter[][] game = new WordleLetter[6][5];
   private int puzzleNumber;
   private int guessNumber = 0;
-  private String guessWord;
+  private String guessWord = "hello";
 
   public WordleGame(int puzzleNumber){
     this.puzzleNumber = puzzleNumber;
@@ -25,7 +25,6 @@ public class WordleGame {
 
         }else if(isInWord(getAnswer(), guessWord.charAt(i))){
           game[guessNumber][i].setColor("yellow");
-
         }else{
           game[guessNumber][i].setColor("red");
         }
@@ -55,7 +54,7 @@ public class WordleGame {
   }
 
   public boolean isGameOver(){
-    return guessNumber == 5 || isGameWin();
+    return guessNumber == 6 || isGameWin();
   }
 
   private boolean isInWord(String answer, char guess){
@@ -69,6 +68,42 @@ public class WordleGame {
     return false;  
  
   }
+
+  // private WordleLetter[] findDuplicate(){
+    
+  //   int constant = 71;
+  //   //char[] charray = new char[5];
+  //   int [] duplicates = new int[26];
+  //   int duplicateCount = 0;
+    
+  //   //Counts how many times each letter appears
+  //   for(int i = 0; i < getAnswer().length(); i++){
+  //     duplicates[getAnswer().charAt(i) - constant]++;      
+  //   }
+
+  //   //Counts the letters that appear 2 
+  //   for(int i = 0; i < 26; i++){
+  //     if(duplicates[i] > 1){
+  //       duplicateCount++;
+  //     } 
+  //   }
+
+  //   WordleLetter[] charray = new WordleLetter[duplicateCount];
+  //   for(int i = 0; i < charray.length; i++){
+  //     for(int j = 0; j < duplicates.length; j++){
+  //       if(duplicates[j] > 1){
+  //         charray[i] = new WordleLetter((char)(j + constant));
+  //       }
+  //     }
+  //   }
+
+  //   for (WordleLetter letter : charray){
+  //     System.out.println(letter);
+  //   }
+
+  //   return charray;
+  // }
+
 
   // TODO - include the remainder of the below code back in once rest of class is implemented.
   // Do not modify this method implementation.
