@@ -1,5 +1,4 @@
-import java.io.FileNotFoundException;
-
+import java.util.Scanner;
 /**
  * Tester file.
  *
@@ -7,7 +6,7 @@ import java.io.FileNotFoundException;
  * Feel free to modify this file as you wish.
  */
 public class Tester {
-  public static void main(String[] args) throws FileNotFoundException {
+  public static void main(String[] args) {
     System.out.println(WordBank.checkInDictionary("hello"));  // true
     System.out.println(WordBank.checkInDictionary("asdfg"));  // false
     System.out.println(WordBank.checkInDictionary("heyy"));  // false
@@ -29,17 +28,23 @@ public class Tester {
     a.setColor("yellow");
     System.out.println(a);
 
-
     // TODO add tests for Wordle Game
-    WordleGame g = new WordleGame(122);
+    WordleGame g = new WordleGame(1326);
     g.guess("about");
     g.guess("trail");
     g.guess("basic");
-    g.guess("bacon");
+    g.guess("basic");
+    g.guess("basic");
 
     System.out.println(g);
+    System.out.println(g.isGameWin());
+    System.out.println(g.isGameOver());
 
     // TODO add tests for Main
-
+    Scanner scanner = new Scanner(System.in);
+    WordleGame game = Main.startGame(scanner);
+    Main.playGame(scanner, game);
+    Main.reportGameOutcome(game);
+  
   }
 }
