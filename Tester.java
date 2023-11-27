@@ -23,7 +23,6 @@ public class Tester {
     a.setColor("green");
     System.out.println(a.isGreen());
     System.out.println(a.isColorSet());
-    a.toString();
     System.out.println(a);
     a.setColor("red");
     System.out.println(a);
@@ -32,6 +31,13 @@ public class Tester {
 
 
     // TODO add tests for Wordle Game
+    WordleGame g = new WordleGame(122);
+    g.guess("about");
+    g.guess("trail");
+    g.guess("basic");
+    g.guess("bacon");
+
+    System.out.println(g);
 
     // TODO add tests for Main
 
