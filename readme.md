@@ -1,1 +1,1 @@
-wsg dawg
+Its Wordle!
