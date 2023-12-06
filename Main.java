@@ -7,39 +7,53 @@ public class Main {
     public static WordleGame startGame(Scanner scanner){
         
         //!Scanner should already be initialized before method is called
+        //Used to check if puzzle number exists
         int puzzleNumber = -1;
         boolean validNumber = false;
        
-
         while(!validNumber){
-            System.out.println("asking for puzzle");
+            System.out.println("What puzzle would you like to attempt. Please enter a number between 0 and 2314");
             puzzleNumber = scanner.nextInt();
+            //Checks if input is valid
             validNumber = (puzzleNumber > -1) && (puzzleNumber < 2315);
         }
 
         WordleGame game = new WordleGame(puzzleNumber);
-        return game;  // TODO - implement and replace me
+        return game; 
     
     }
 
     // Do not modify the method signature.
     public static void playGame(Scanner scanner, WordleGame game) {
+        String guessNumberMessage;
         while(!game.isGameOver()){
-            System.out.println("make guess");
+            
+            //Modifies message telling user the number of guesses left
+            if(game.getNumberGuessesSoFar() == 5){
+                guessNumberMessage = " guess left.";
+            }else{
+                guessNumberMessage = " guesses left.";
+            }
+            //Tells user how many guesses they have left
+            System.out.println("Make a guess, you have " + (6 - game.getNumberGuessesSoFar())  + guessNumberMessage);
+            //Takes in next guess
             String guess = scanner.next();
             game.guess(guess);
             System.out.println(game);
+        
         }
+    
     }
 
     // Do not modify the method signature.
     public static void reportGameOutcome(WordleGame game) {
-        if (game.isGameWin()){
-            System.out.println("You won!");
-        }else{
+        
+        if(!game.isGameWin()){
             System.out.println("The answer was " + game.getAnswer());
+            return;
         }
-        // TODO - implement
+
+        System.out.println("You won!");
     }
 
     // This main method body should not be modified.
@@ -49,5 +63,6 @@ public class Main {
         WordleGame game = startGame(scanner);
         playGame(scanner, game);
         reportGameOutcome(game);
+
     }
 }

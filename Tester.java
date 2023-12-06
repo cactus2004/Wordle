@@ -35,7 +35,7 @@ public class Tester {
     g.guess("basic");
     g.guess("basic");
     g.guess("basic");
-
+    //System.out.println(g.findDuplicate());
     System.out.println(g);
     System.out.println(g.isGameWin());
     System.out.println(g.isGameOver());

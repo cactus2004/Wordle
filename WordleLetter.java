@@ -1,10 +1,10 @@
 public class WordleLetter {
 
 	// TODO - implement according to spec
-
 	private char letter;
 	private String color;
 
+	//Constructor
 	public WordleLetter (char letter){
 		this.letter = letter;
 	}
@@ -24,12 +24,10 @@ public class WordleLetter {
 		if(color == null){
 			return false;
 		}
-
 		if(color.equals("green")){
 			return true;
 		}
 		return false;
-	
 	}
 
 
@@ -44,9 +42,11 @@ public class WordleLetter {
 	 		colorCode = "\u001B[32m";
 	 	} else if(color.equals("yellow")) {
 	 		colorCode = "\u001B[33m";
-	 	} else {
+	 	} else if(color == null){
 	 		colorCode = "\u001B[31m";
-	 	}
+	 	}else{
+	 		colorCode = "\u001B[31m";
+		}
 	
 		// These are the special character to add
 		// to the end of the String

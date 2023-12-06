@@ -1,9 +1,10 @@
 public class WordleGame {
   // TODO - implement according to spec
+
   private WordleLetter[][] game = new WordleLetter[6][5];
   private int puzzleNumber;
   private int guessNumber = 0;
-  private String guessWord = "hello";
+  private String guessWord;
 
   public WordleGame(int puzzleNumber){
     this.puzzleNumber = puzzleNumber;
@@ -14,20 +15,31 @@ public class WordleGame {
   }
 
   public void guess(String guessWord){
+
     if(WordBank.checkInDictionary(guessWord)){
+      
+      //Needed to check if the answer and guesses match
       this.guessWord = guessWord;
       for (int i = 0; i < 5; i++){
-        WordleLetter letter = new WordleLetter(guessWord.charAt(i));
-        game[guessNumber][i] = letter;
-        
-        if(getAnswer().charAt(i) == guessWord.charAt(i)){
-          game[guessNumber][i].setColor("green");
 
+        //Initializes wordleLetters to be stored in an array later
+        WordleLetter letter = new WordleLetter(guessWord.charAt(i));
+        
+        //Color setup
+        if(getAnswer().charAt(i) == guessWord.charAt(i)){
+          
+          letter.setColor("green");
+
+        //Uses helper function for yellow letters
         }else if(isInWord(getAnswer(), guessWord.charAt(i))){
-          game[guessNumber][i].setColor("yellow");
+          letter.setColor("yellow");
+
         }else{
-          game[guessNumber][i].setColor("red");
+          letter.setColor("red");
         }
+
+        //Adds colored wordleLetter to array
+        game[guessNumber][i] = letter;
 
       }
 
@@ -45,20 +57,19 @@ public class WordleGame {
   }
 
   public boolean isGameWin(){
-    for (int i = 0; i < 5; i++){
-      if(getAnswer().charAt(i) != guessWord.charAt(i)){
-        return false;
-      }
+    if (guessWord == null){
+      return false;
     }
-    return true;
+    return guessWord.equals(getAnswer());    
   }
 
   public boolean isGameOver(){
+    //Game stops after 6 guesses
     return guessNumber == 6 || isGameWin();
   }
 
+  //Helper function for coloring yellow letters
   private boolean isInWord(String answer, char guess){
-    
     for (int i = 0; i < 5; i++){
       if(answer.charAt(i) == guess){
         return true;
@@ -68,42 +79,6 @@ public class WordleGame {
     return false;  
  
   }
-
-  // private WordleLetter[] findDuplicate(){
-    
-  //   int constant = 71;
-  //   //char[] charray = new char[5];
-  //   int [] duplicates = new int[26];
-  //   int duplicateCount = 0;
-    
-  //   //Counts how many times each letter appears
-  //   for(int i = 0; i < getAnswer().length(); i++){
-  //     duplicates[getAnswer().charAt(i) - constant]++;      
-  //   }
-
-  //   //Counts the letters that appear 2 
-  //   for(int i = 0; i < 26; i++){
-  //     if(duplicates[i] > 1){
-  //       duplicateCount++;
-  //     } 
-  //   }
-
-  //   WordleLetter[] charray = new WordleLetter[duplicateCount];
-  //   for(int i = 0; i < charray.length; i++){
-  //     for(int j = 0; j < duplicates.length; j++){
-  //       if(duplicates[j] > 1){
-  //         charray[i] = new WordleLetter((char)(j + constant));
-  //       }
-  //     }
-  //   }
-
-  //   for (WordleLetter letter : charray){
-  //     System.out.println(letter);
-  //   }
-
-  //   return charray;
-  // }
-
 
   // TODO - include the remainder of the below code back in once rest of class is implemented.
   // Do not modify this method implementation.
@@ -121,6 +96,8 @@ public class WordleGame {
       // new line separator between each word
       result += "\n";
     }
+
     return result;
+  
   }
 }
