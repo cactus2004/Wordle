@@ -30,6 +30,10 @@ public class WordleLetter {
 		return false;
 	}
 
+	public char getLetter(){
+		return this.letter;
+	}
+
 
 	// TODO - include the below code back in once rest of class is implemented.
 	// Do not modify this method implementation.

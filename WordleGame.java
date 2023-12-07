@@ -18,30 +18,50 @@ public class WordleGame {
 
     if(WordBank.checkInDictionary(guessWord)){
       
+      String temp = getAnswer();
       //Needed to check if the answer and guesses match
       this.guessWord = guessWord;
       for (int i = 0; i < 5; i++){
 
-        //Initializes wordleLetters to be stored in an array later
-        WordleLetter letter = new WordleLetter(guessWord.charAt(i));
-        
-        //Color setup
-        if(getAnswer().charAt(i) == guessWord.charAt(i)){
-          
-          letter.setColor("green");
-
-        //Uses helper function for yellow letters
-        }else if(isInWord(getAnswer(), guessWord.charAt(i))){
-          letter.setColor("yellow");
-
-        }else{
-          letter.setColor("red");
-        }
-
-        //Adds colored wordleLetter to array
-        game[guessNumber][i] = letter;
+        //Initializes wordleLetters and adds them to wordle array
+        WordleLetter wordleLetter = new WordleLetter(guessWord.charAt(i));
+        game[guessNumber][i] = wordleLetter;
 
       }
+
+      /*Applying colors to each letter
+      *
+      *
+      */
+
+      //Applies green
+      for (int i = 0; i < 5; i++){
+        WordleLetter wordleLetter = game[guessNumber][i];
+        if(wordleLetter.getLetter() == getAnswer().charAt(i)){
+          wordleLetter.setColor("green");
+          //Removes the green letters from our temporary answer to prevent double "yellow" letters
+          temp = temp.replaceFirst(repeatedLetter(temp, game[guessNumber][i].getLetter()), " ");
+        }
+      }
+
+       //Applies Yellow
+       for (int i = 0; i < 5; i++){
+         WordleLetter wordleLetter = game[guessNumber][i];
+         //Uses helper function to check that a letter exists in our temp string
+         if(isInWord(temp, wordleLetter.getLetter()) && !wordleLetter.isGreen()){
+           wordleLetter.setColor("yellow");
+           //Removes the yellow letter from our temporary answer to prevent double "yellow" letters
+           temp = temp.replaceFirst(repeatedLetter(temp, wordleLetter.getLetter()), " ");
+         }
+       }
+
+       //Applies red
+       for (int i = 0; i < 5; i++){
+        //If statement needed to not overide previous colors
+         if(!game[guessNumber][i].isColorSet()){
+           game[guessNumber][i].setColor("i have the best TA's");
+         }
+       }
 
       guessNumber++;
 
@@ -50,6 +70,16 @@ public class WordleGame {
 
   public int getNumberGuessesSoFar(){
     return guessNumber;
+  }
+
+  //Helper function that retutns the repeated character in a string
+  private String repeatedLetter(String answer, char letter){
+    for (int i = 0; i < 5 ; i++ ){
+      if(answer.charAt(i) == letter){
+        return Character.toString(answer.charAt(i));
+      }
+    }
+    return null;
   }
 
   public WordleLetter[] getGuess(int guessNumber){
