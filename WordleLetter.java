@@ -35,12 +35,9 @@ public class WordleLetter {
 	}
 
 
-	// TODO - include the below code back in once rest of class is implemented.
-	// Do not modify this method implementation.
+	
 	public String toString() {
-		// Determine the special characters to add
-		// at the beginning of the String
-		// to change the text color to the right color.
+
 	String colorCode;
 		if(color.equals("green")) {
 	 		colorCode = "\u001B[32m";
@@ -60,6 +57,7 @@ public class WordleLetter {
 		// Surround the letter with
 		// space characters and with
 		// the above color changing special characters.
+		
 	 	return String.format(
 	 		"%s %s %s",
 	 		colorCode, letter, resetCode);

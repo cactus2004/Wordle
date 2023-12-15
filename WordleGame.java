@@ -1,6 +1,6 @@
 public class WordleGame {
-  // TODO - implement according to spec
 
+  //* An entire wordle game can be represented in a 6 by 5 grid of guessed letters
   private WordleLetter[][] game = new WordleLetter[6][5];
   private int puzzleNumber;
   private int guessNumber = 0;
@@ -110,17 +110,14 @@ public class WordleGame {
  
   }
 
-  // TODO - include the remainder of the below code back in once rest of class is implemented.
-  // Do not modify this method implementation.
+
   public String toString() {
-    // result will be used to build the full answer String
+
     String result = "";
     // for each word guessed so far
     for (int i = 0; i < getNumberGuessesSoFar(); i++) {
       // get each letter of each word
       for (int j = 0; j < 5; j++) {
-        // concatenate it to the result
-        // WordleLetter's toString() is automatically invoked here.
         result += getGuess(i)[j];
       }
       // new line separator between each word
